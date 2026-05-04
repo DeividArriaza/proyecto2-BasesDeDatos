@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { api, palette } from './api.js';
 import Login from './Login.jsx';
+import Layout from './Layout.jsx';
 import Catalog from './Catalog.jsx';
+import ProductosAdmin from './ProductosAdmin.jsx';
+import ClientesAdmin from './ClientesAdmin.jsx';
+import Reportes from './Reportes.jsx';
+import Ventas from './Ventas.jsx';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -39,11 +44,18 @@ export default function App() {
           path="/login"
           element={user ? <Navigate to="/" replace /> : <Login onLogin={setUser} />}
         />
-        <Route
-          path="/"
-          element={user ? <Catalog user={user} onLogout={() => setUser(null)} /> : <Navigate to="/login" replace />}
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {user ? (
+          <Route element={<Layout user={user} onLogout={() => setUser(null)} />}>
+            <Route path="/" element={<Catalog />} />
+            <Route path="/productos" element={<ProductosAdmin />} />
+            <Route path="/clientes" element={<ClientesAdmin />} />
+            <Route path="/ventas" element={<Ventas />} />
+            <Route path="/reportes" element={<Reportes />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        )}
       </Routes>
     </BrowserRouter>
   );

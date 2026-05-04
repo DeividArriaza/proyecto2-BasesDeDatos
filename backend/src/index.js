@@ -4,6 +4,10 @@ import { pool } from './db.js';
 import { cors } from './middleware.js';
 import { authRouter } from './routes/auth.js';
 import { productosRouter } from './routes/productos.js';
+import { clientesRouter } from './routes/clientes.js';
+import { catalogosRouter } from './routes/catalogos.js';
+import { reportesRouter } from './routes/reportes.js';
+import { ventasRouter } from './routes/ventas.js';
 
 const app = express();
 const port = Number(process.env.PORT) || 58080;
@@ -36,6 +40,10 @@ app.get('/health', async (_req, res) => {
 
 app.use('/auth', authRouter);
 app.use('/productos', productosRouter);
+app.use('/clientes', clientesRouter);
+app.use('/reportes', reportesRouter);
+app.use('/ventas', ventasRouter);
+app.use('/', catalogosRouter); // expone /categorias y /marcas
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`backend listening on :${port}`);

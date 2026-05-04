@@ -87,7 +87,8 @@ CREATE TABLE Cliente (
   telefono        VARCHAR(30),
   email           VARCHAR(120),
   direccion       TEXT,
-  fecha_registro  TIMESTAMP     NOT NULL DEFAULT NOW()
+  fecha_registro  TIMESTAMP     NOT NULL DEFAULT NOW(),
+  activo          BOOLEAN       NOT NULL DEFAULT TRUE
 );
 
 -- -----------------------------------------------------------------------------
