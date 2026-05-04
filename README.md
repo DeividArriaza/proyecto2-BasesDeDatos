@@ -44,6 +44,13 @@ Cuando los tres servicios estén `healthy/up` (≈ 30 segundos):
 | Backend  | <http://localhost:58080> (`/health`) |
 | DB       | `localhost:55432` (Postgres)         |
 
+Abrí el frontend, va a redirigir automáticamente a `/login`. Las credenciales para entrar son:
+
+```
+usuario:    ericka
+contraseña: demo123
+```
+
 Detener: `docker compose down` (preserva datos) o `docker compose down -v` (borra el volumen y vuelve a sembrar).
 
 ---
