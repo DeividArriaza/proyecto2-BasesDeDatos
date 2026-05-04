@@ -1,175 +1,175 @@
 -- =============================================================================
--- Seed data: ≥25 registros por tabla (rúbrica I, 5 pts).
--- Orden respeta dependencias de FKs. Todo envuelto en una transacción para
--- que, si un INSERT falla, no queden tablas parcialmente pobladas.
--- Impuestos calculados al 12% (IVA Guatemala).
+-- Seed Bubu's Bakery — repostería boutique especializada en brownies.
+-- ≥25 registros por tabla (rúbrica I, 5 pts). Orden respeta dependencias FK.
+-- Todo envuelto en una transacción: si un INSERT falla nada queda persistido.
+-- Impuesto = 12% IVA Guatemala. Precios en quetzales (GTQ).
 -- =============================================================================
 
 BEGIN;
 
 -- -----------------------------------------------------------------------------
--- Categoria (25)
+-- Categoria (25) — universo de repostería con foco en brownies (5 categorías)
 -- -----------------------------------------------------------------------------
 INSERT INTO Categoria (nombre, descripcion) VALUES
-('Electrónica',   'Dispositivos electrónicos de consumo'),
-('Hogar',         'Productos para el hogar'),
-('Oficina',       'Artículos de oficina'),
-('Ropa',          'Prendas de vestir'),
-('Calzado',       'Zapatos y similares'),
-('Juguetes',      'Juguetes infantiles'),
-('Libros',        'Libros y literatura'),
-('Papelería',     'Útiles escolares y de papelería'),
-('Deportes',      'Artículos deportivos'),
-('Jardín',        'Productos para jardinería'),
-('Herramientas',  'Herramientas manuales y eléctricas'),
-('Cocina',        'Utensilios de cocina'),
-('Baño',          'Artículos para el baño'),
-('Limpieza',      'Productos de limpieza'),
-('Belleza',       'Cosméticos y cuidado personal'),
-('Salud',         'Productos de salud y farmacia'),
-('Tecnología',    'Gadgets y accesorios tech'),
-('Mascotas',      'Artículos para mascotas'),
-('Comida',        'Alimentos empacados'),
-('Bebidas',       'Bebidas embotelladas y enlatadas'),
-('Automotriz',    'Accesorios para vehículos'),
-('Música',        'Instrumentos y accesorios musicales'),
-('Arte',          'Materiales de arte'),
-('Bebés',         'Artículos para bebés'),
-('Fitness',       'Equipamiento de ejercicio');
+('Brownies Clásicos',         'Brownies tradicionales recién horneados'),
+('Brownies Premium',          'Brownies de receta especial y porciones grandes'),
+('Brownies Veganos',          'Brownies sin lácteos ni huevo'),
+('Brownies Sin Azúcar',       'Brownies endulzados con stevia o eritritol'),
+('Brownies Rellenos',         'Brownies con relleno de cremas, frutas o dulces'),
+('Cupcakes',                  'Pastelitos individuales con frosting'),
+('Muffins',                   'Panecillos dulces tipo americano'),
+('Galletas',                  'Galletas artesanales horneadas en casa'),
+('Cookies Rellenas',          'Cookies tipo NY style con relleno'),
+('Pasteles',                  'Pasteles enteros para celebraciones'),
+('Tartas',                    'Tartas dulces de frutas y cremas'),
+('Cheesecakes',               'Pasteles de queso variados'),
+('Macarrones',                'Macarrones franceses surtidos'),
+('Donas',                     'Donas glaseadas y rellenas'),
+('Cinnamon Rolls',            'Rollos de canela con glaseado'),
+('Croissants Dulces',         'Croissants con chocolate, almendra y crema'),
+('Pan Dulce',                 'Pan dulce tradicional guatemalteco'),
+('Trufas',                    'Trufas de chocolate artesanales'),
+('Chocolates',                'Bombones y barras de chocolate'),
+('Bebidas Calientes',         'Café, chocolate caliente y tés'),
+('Bebidas Frías',             'Frappés, smoothies y bebidas heladas'),
+('Postres Fríos',             'Helados, mousses y postres refrigerados'),
+('Repostería Sin Gluten',     'Productos aptos para celíacos'),
+('Productos de Temporada',    'Repostería para fechas especiales'),
+('Cajas de Regalo',           'Surtidos empacados para obsequiar');
 
 -- -----------------------------------------------------------------------------
--- Marca (25)
+-- Marca (25) — líneas propias de Bubu's + marcas de insumos importados
 -- -----------------------------------------------------------------------------
 INSERT INTO Marca (nombre, descripcion) VALUES
-('Sony',           'Electrónica japonesa'),
-('Samsung',        'Electrónica coreana'),
-('LG',             'Electrodomésticos y electrónica'),
-('Apple',          'Tecnología premium'),
-('HP',             'Computación e impresión'),
-('Dell',           'Computación empresarial'),
-('Logitech',       'Periféricos de computadora'),
-('Nike',           'Deportiva estadounidense'),
-('Adidas',         'Deportiva alemana'),
-('Puma',           'Deportiva alemana'),
-('Kleenex',        'Pañuelos y productos de papel'),
-('Colgate',        'Higiene bucal'),
-('Nestle',         'Alimentos procesados'),
-('Coca-Cola',      'Bebidas'),
-('PepsiCo',        'Bebidas y snacks'),
-('Lego',           'Juguetes de construcción'),
-('Mattel',         'Juguetes clásicos'),
-('Bosch',          'Herramientas y electrodomésticos'),
-('Black & Decker', 'Herramientas para el hogar'),
-('3M',             'Productos industriales y adhesivos'),
-('Bic',            'Artículos de escritura'),
-('Faber-Castell',  'Arte y papelería'),
-('Stanley',        'Herramientas manuales'),
-('Makita',         'Herramientas eléctricas'),
-('Genérico',       'Marca sin especificar');
+('Bubu''s Original',          'Línea base de la casa'),
+('Bubu''s Premium',           'Línea premium con ingredientes selectos'),
+('Bubu''s Vegano',            'Línea 100% vegetal'),
+('Bubu''s Sin Azúcar',        'Línea apta para diabéticos'),
+('Bubu''s Kids',              'Línea infantil con colores y diseños divertidos'),
+('Bubu''s Pro',               'Línea profesional para empresas y eventos'),
+('Bubu''s Edición Limitada',  'Lanzamientos especiales y de temporada'),
+('Bubu''s Fit',               'Bajos en calorías y altos en proteína'),
+('Bubu''s Gourmet',           'Recetas de autor con técnica avanzada'),
+('Hershey''s',                'Chocolate estadounidense'),
+('Cadbury',                   'Chocolate británico'),
+('Nestlé',                    'Multinacional de alimentos'),
+('Ghirardelli',               'Chocolate premium estadounidense'),
+('Lindt',                     'Chocolate suizo de alta gama'),
+('Anchor',                    'Lácteos neozelandeses'),
+('Sula',                      'Lácteos guatemaltecos'),
+('Foremost',                  'Lácteos centroamericanos'),
+('Ferrero',                   'Confitería italiana'),
+('Toblerone',                 'Chocolate suizo con almendra y miel'),
+('Milka',                     'Chocolate alpino con leche'),
+('Oreo',                      'Galletas rellenas de crema'),
+('Nutella',                   'Crema de avellanas y cacao'),
+('Kraft',                     'Quesos y productos de repostería'),
+('Domino',                    'Azúcares refinados y morenos'),
+('Genérico',                  'Marca sin especificar para insumos varios');
 
 -- -----------------------------------------------------------------------------
--- Rol (25)
+-- Rol (25) — adaptados al rubro de repostería
 -- -----------------------------------------------------------------------------
 INSERT INTO Rol (nombre, descripcion) VALUES
-('Administrador',    'Control total del sistema'),
-('Gerente General',  'Gestión global de la tienda'),
-('Gerente Sucursal', 'Gestión de una sucursal'),
-('Supervisor',       'Supervisión de turno'),
-('Cajero',           'Operación de caja y ventas'),
-('Bodeguero',        'Control de inventario físico'),
-('Vendedor',         'Atención y venta en piso'),
-('Contador',         'Gestión contable'),
-('Auditor',          'Revisión y auditoría interna'),
-('RRHH',             'Recursos humanos'),
-('Seguridad',        'Vigilancia y prevención de pérdida'),
-('Limpieza',         'Mantenimiento y aseo'),
-('Recepcionista',    'Atención al público en recepción'),
-('Marketing',        'Publicidad y promociones'),
-('Sistemas',         'Soporte de tecnología'),
-('Soporte Técnico',  'Atención postventa técnica'),
-('Logística',        'Gestión de envíos y entregas'),
-('Jefe de Compras',  'Gestión de proveedores y compras'),
-('Analista Calidad', 'Control de calidad'),
-('Entrenador',       'Capacitación de personal'),
-('Analista Datos',   'Reportes y análisis'),
-('Asistente',        'Apoyo general administrativo'),
-('Practicante',      'Estudiante en práctica'),
-('Jefe de Turno',    'Coordinación de turno'),
-('Asesor Comercial', 'Asesoría de ventas B2B');
+('Administrador',           'Control total del sistema'),
+('Gerente General',         'Gestión global de la cadena'),
+('Gerente Sucursal',        'Gestión de un local'),
+('Supervisor Producción',   'Supervisión de turnos en cocina'),
+('Pastelero Jefe',          'Líder del equipo de pastelería'),
+('Pastelero',               'Elaboración de pasteles y postres'),
+('Repostero',               'Especialista en repostería fina'),
+('Decorador',               'Decoración de pasteles y brownies'),
+('Hornero',                 'Operación de hornos y tiempos de cocción'),
+('Asistente Cocina',        'Preparación de mise en place y limpieza'),
+('Cajero',                  'Operación de caja y cobros'),
+('Barista',                 'Preparación de bebidas calientes y frías'),
+('Vendedor Mostrador',      'Atención al cliente en mostrador'),
+('Repartidor',              'Entregas a domicilio y delivery'),
+('Encargado Bodega',        'Control de inventario de insumos'),
+('Encargado Compras',       'Gestión de proveedores y pedidos'),
+('Contador',                'Gestión contable y fiscal'),
+('Auditor',                 'Revisión y auditoría interna'),
+('Marketing Digital',       'Estrategia digital y campañas'),
+('Community Manager',       'Manejo de redes sociales'),
+('Recepcionista',           'Atención al público en oficina central'),
+('Limpieza',                'Mantenimiento y aseo de locales'),
+('Seguridad',               'Vigilancia y prevención de pérdidas'),
+('Practicante',             'Estudiante en práctica supervisada'),
+('Soporte Técnico',         'Soporte al sistema POS y equipos');
 
 -- -----------------------------------------------------------------------------
--- Sucursal (25)
+-- Sucursal (25) — franquicia Bubu's en expansión por Guatemala
 -- -----------------------------------------------------------------------------
 INSERT INTO Sucursal (nombre, direccion, telefono) VALUES
-('Zona 1 Centro',          '6a Av 10-20, Zona 1, Ciudad de Guatemala',      '2232-0001'),
-('Zona 4 Cuatro Grados',   '4a Av 15-30, Zona 4, Ciudad de Guatemala',      '2232-0002'),
-('Zona 10 Oakland',        'Av La Reforma 10-15, Zona 10',                  '2332-0003'),
-('Zona 11 Majadas',        'Calzada Roosevelt 20-15, Zona 11',              '2432-0004'),
-('Zona 13 Aeropuerto',     'Av Hincapié 15-80, Zona 13',                    '2332-0005'),
-('Zona 14 Plaza Fontabella','Av Las Américas 7-20, Zona 14',                '2432-0006'),
-('Zona 15 Vista Hermosa',  '20 Calle 25-85, Zona 15',                       '2332-0007'),
-('Zona 16 Cayalá',         'Paseo Cayalá L-2, Zona 16',                     '2332-0008'),
-('Zona 17 Lourdes',        '3a Calle 17-50, Zona 17',                       '2432-0009'),
-('Zona 18 Atlántico',      '15 Av 20-30, Zona 18',                          '2432-0010'),
-('CES Carretera Salvador', 'Km 13.5 Carr a El Salvador',                    '6632-0011'),
-('Mixco San Cristóbal',    '11 Av 0-30, San Cristóbal, Mixco',              '6632-0012'),
-('Villa Nueva',            '4a Calle 2-50, Villa Nueva',                    '6632-0013'),
-('San Miguel Petapa',      'Av Principal 1-10, San Miguel Petapa',          '6632-0014'),
-('Chimaltenango',          '2a Av 3-15, Chimaltenango',                     '7832-0015'),
-('Antigua Guatemala',      '5a Av Norte 10, Antigua',                       '7832-0016'),
-('Escuintla',              '4a Av 2-50, Escuintla',                         '7832-0017'),
-('Quetzaltenango',         '14 Av 3-33, Zona 1, Xela',                      '7732-0018'),
-('Huehuetenango',          '5a Av 4-20, Huehue',                            '7732-0019'),
-('Cobán',                  '1a Calle 2-30, Zona 2, Cobán',                  '7932-0020'),
-('Mazatenango',            '7a Av 5-12, Zona 1, Maza',                      '7832-0021'),
-('Retalhuleu',             '6a Av 3-30, Reu',                               '7832-0022'),
-('Jutiapa',                '2a Av 1-15, Jutiapa',                           '7832-0023'),
-('Santa Rosa Cuilapa',     '3a Calle 2-20, Cuilapa',                        '7832-0024'),
-('Alta Verapaz San Pedro', 'Calle Principal 1-5, San Pedro Carchá',         '7932-0025');
+('Bubu''s Bakery',           'Sede Central, Paseo Cayalá L-15, Zona 16',        '2332-2001'),
+('Bubu''s Oakland Mall',     'Diagonal 6 13-01, Zona 10',                       '2332-2002'),
+('Bubu''s Pradera',          'Vista Hermosa I, 20 Calle 24-50, Zona 15',        '2332-2003'),
+('Bubu''s Miraflores',       '21 Av 4-32, Zona 11',                             '2432-2004'),
+('Bubu''s Tikal Futura',     'Calzada Roosevelt 22-43, Zona 11',                '2432-2005'),
+('Bubu''s Plaza Fontabella', '4a Av 12-59, Zona 10',                            '2332-2006'),
+('Bubu''s Antigua Centro',   '5a Av Norte 25, Antigua Guatemala',               '7832-2007'),
+('Bubu''s Antigua Plaza',    '4a Calle Oriente 12, Antigua Guatemala',          '7832-2008'),
+('Bubu''s Xela Pradera',     'Pradera Xela Local 18, Quetzaltenango',           '7732-2009'),
+('Bubu''s Huehuetenango',    '5a Av 4-20, Zona 1, Huehue',                      '7732-2010'),
+('Bubu''s Cobán',            '1a Calle 2-30, Zona 2, Cobán',                    '7932-2011'),
+('Bubu''s Escuintla',        '4a Av 2-50, Escuintla',                           '7832-2012'),
+('Bubu''s Mazatenango',      '7a Av 5-12, Zona 1, Maza',                        '7832-2013'),
+('Bubu''s Retalhuleu',       '6a Av 3-30, Reu',                                 '7832-2014'),
+('Bubu''s Jutiapa',          '2a Av 1-15, Jutiapa',                             '7832-2015'),
+('Bubu''s Mixco',            '11 Av 0-30, San Cristóbal, Mixco',                '6632-2016'),
+('Bubu''s Villa Nueva',      '4a Calle 2-50, Villa Nueva',                      '6632-2017'),
+('Bubu''s San Cristóbal',    'Centro Comercial San Cristóbal Local 22, Mixco',  '6632-2018'),
+('Bubu''s Carretera Salvador','Km 13.5 Carr a El Salvador',                     '6632-2019'),
+('Bubu''s Aeropuerto',       'Aeropuerto La Aurora, Zona 13',                   '2332-2020'),
+('Bubu''s Boutique Reforma', 'Av La Reforma 8-50, Zona 9',                      '2332-2021'),
+('Bubu''s Móvil 1 (Truck)',  'Food truck rotativo zona 10/14/16',               '5511-2022'),
+('Bubu''s Móvil 2 (Truck)',  'Food truck rotativo zona 4/9/15',                 '5511-2023'),
+('Bubu''s Express Online',   'Centro de despacho — solo delivery',              '2332-2024'),
+('Bubu''s Kiosko Hospital',  'Hospital Herrera Llerandi, Zona 10',              '2332-2025');
 
 -- -----------------------------------------------------------------------------
--- MetodoPago (25)
+-- MetodoPago (25) — incluye opciones digitales relevantes en Guatemala
 -- -----------------------------------------------------------------------------
 INSERT INTO MetodoPago (nombre) VALUES
 ('Efectivo'), ('Tarjeta Débito'), ('Tarjeta Crédito Visa'),
 ('Tarjeta Crédito MasterCard'), ('Tarjeta Crédito AmEx'),
-('Transferencia Bancaria'), ('Cheque'), ('PayPal'),
-('Apple Pay'), ('Google Pay'), ('Samsung Pay'),
-('Visa Cuotas'), ('MasterCard Cuotas'), ('Zelle'),
-('Venmo'), ('Cash App'), ('MercadoPago'),
-('Stripe'), ('Bancolombia Transfer'), ('Nequi'),
-('Daviplata'), ('Rappi Pay'), ('Western Union'),
-('MoneyGram'), ('Crédito Interno');
+('Transferencia Banrural'), ('Transferencia BI'), ('Transferencia G&T'),
+('Transferencia BAC'), ('Transferencia Banco Industrial'),
+('Cheque'), ('Visa Cuotas'), ('MasterCard Cuotas'),
+('PayPal'), ('Apple Pay'), ('Google Pay'),
+('Tigo Money'), ('Claro Pagos'), ('Wallet Bubu''s'),
+('Crédito Empresarial'), ('Stripe'), ('MercadoPago'),
+('Western Union'), ('Crédito Interno'), ('Vale de Regalo Bubu''s');
 
 -- -----------------------------------------------------------------------------
--- Proveedor (25)
+-- Proveedor (25) — distribuidoras de insumos de repostería
 -- -----------------------------------------------------------------------------
 INSERT INTO Proveedor (nombre, nit, telefono, email, direccion) VALUES
-('Distribuidora Central S.A.',    '1234567-1', '2232-1001', 'ventas@distcentral.gt',   '5a Av 10-10 Z1'),
-('Importadora del Sur Ltda.',     '1234568-2', '2232-1002', 'contacto@impsur.gt',      '8a Av 5-20 Z4'),
-('Mayoreo Pacífico',              '1234569-3', '2232-1003', 'pedidos@maypacif.gt',     'Diagonal 6 15-30 Z10'),
-('Global Trade Guatemala',        '1234570-4', '2232-1004', 'info@globaltrade.gt',     'Calzada Roosevelt 20-80'),
-('Proveedora Tech Plus',          '1234571-5', '2232-1005', 'ventas@techplus.gt',      'Av La Reforma 12-01 Z10'),
-('Industrias Unidas',             '1234572-6', '2332-1006', 'compras@indunidas.gt',    'Km 15 Ruta al Atlántico'),
-('Alimentos del Valle',           '1234573-7', '2332-1007', 'ventas@alvalle.gt',       'Km 30 CA-1 Sur'),
-('Bebidas Premium',               '1234574-8', '2332-1008', 'pedidos@bebprem.gt',      'Calzada Aguilar Batres 33'),
-('Textiles Maya',                 '1234575-9', '2332-1009', 'info@texmaya.gt',         'Av Las Américas 9-05 Z13'),
-('Calzado Nacional',              '1234576-K', '2332-1010', 'ventas@calnac.gt',        'Calle Marti 3-20 Z6'),
-('Juguetes Chapín',               '1234577-1', '2432-1011', 'contacto@jugchapin.gt',   '20 Calle 15-30 Z11'),
-('Librería Universal',            '1234578-2', '2432-1012', 'pedidos@libuniv.gt',      '6a Av 11-38 Z1'),
-('Papelería La Oficina',          '1234579-3', '2432-1013', 'ventas@laoficina.gt',     '7a Av 14-15 Z4'),
-('Deportes Guate',                '1234580-4', '2432-1014', 'info@depguate.gt',        'Av Petapa 45-50 Z12'),
-('Jardines Tropicales',           '1234581-5', '2432-1015', 'contacto@jarditrop.gt',   'Km 17 Carr El Salvador'),
-('Ferretería Industrial',         '1234582-6', '2632-1016', 'ventas@ferrind.gt',       'Anillo Periférico 8-50'),
-('Hogar Total',                   '1234583-7', '2632-1017', 'pedidos@hogartotal.gt',   'Boulevard Los Próceres 5'),
-('Belleza y Estilo',              '1234584-8', '2632-1018', 'info@beyest.gt',          '12 Calle 1-25 Z10'),
-('Farmacéutica Central',          '1234585-9', '2632-1019', 'ventas@farmcen.gt',       '9a Av 12-50 Z1'),
-('Tech Imports',                  '1234586-K', '2732-1020', 'contacto@techimp.gt',     'Av Reforma 15-45 Z9'),
-('Mascotas Felices',              '1234587-1', '2732-1021', 'info@masfelices.gt',      'Calle Mariscal 3-22 Z11'),
-('Alimentos Gourmet',             '1234588-2', '2732-1022', 'ventas@algourmet.gt',     '7a Av 20-15 Z14'),
-('Automotriz del Norte',          '1234589-3', '2732-1023', 'pedidos@autonorte.gt',    'Calzada San Juan 35'),
-('Música y Sonido',               '1234590-4', '2732-1024', 'contacto@musson.gt',      '6a Av 8-50 Z1'),
-('Arte Creativo',                 '1234591-5', '2732-1025', 'ventas@artcreat.gt',      'Diagonal 12 3-20 Z10');
+('Molinos Modernos S.A.',           '1234567-1', '2232-3001', 'ventas@molinosmod.gt',   'Calzada Roosevelt 8-50 Z11'),
+('Chocolatera Centroamericana',     '1234568-2', '2232-3002', 'pedidos@chococa.gt',     '6a Av 3-15 Z4'),
+('Lácteos La Pradera',              '1234569-3', '2232-3003', 'ventas@lapradera.gt',    'Km 22 Carr al Pacífico'),
+('Azucarera Santa Ana',             '1234570-4', '2232-3004', 'info@azsantana.gt',      'Escuintla, Carretera CA-9'),
+('Empaques Repostería GT',          '1234571-5', '2232-3005', 'ventas@empgt.gt',        'Anillo Periférico 12-20'),
+('Frutas del Pacífico',             '1234572-6', '2332-3006', 'compras@frutaspac.gt',   'Mercado La Terminal Z4'),
+('Distribuidora Nestlé GT',         '1234573-7', '2332-3007', 'ventas@nestle.gt',       'Calzada Aguilar Batres 33'),
+('Hershey''s Guatemala',            '1234574-8', '2332-3008', 'pedidos@hersheys.gt',    'Av Las Américas 9-05 Z13'),
+('Café Antigua Trading',            '1234575-9', '2332-3009', 'ventas@cafeantigua.gt',  '5a Av Norte 30, Antigua'),
+('Cremería Guatemalteca',           '1234576-K', '2332-3010', 'info@cremeria.gt',       'Calzada San Juan 40 Z7'),
+('Importadora de Especias',         '1234577-1', '2432-3011', 'ventas@espeimport.gt',   '20 Calle 15-30 Z11'),
+('Levaduras y Fermentos S.A.',      '1234578-2', '2432-3012', 'pedidos@levaduras.gt',   '6a Av 11-38 Z1'),
+('Distribuidora Sula',              '1234579-3', '2432-3013', 'ventas@sula.gt',         '7a Av 14-15 Z4'),
+('Productos Anchor GT',             '1234580-4', '2432-3014', 'info@anchor.gt',         'Av Petapa 45-50 Z12'),
+('Frutos Secos del Valle',          '1234581-5', '2432-3015', 'contacto@fsvalle.gt',    'Km 17 Carr El Salvador'),
+('Esencias y Saborizantes',         '1234582-6', '2632-3016', 'ventas@esencias.gt',     'Anillo Periférico 8-50'),
+('Aceites Premium GT',              '1234583-7', '2632-3017', 'pedidos@aceitespre.gt',  'Boulevard Los Próceres 5'),
+('Distribuidora Foremost',          '1234584-8', '2632-3018', 'info@foremost.gt',       '12 Calle 1-25 Z10'),
+('Mayoreo Repostería Centro',       '1234585-9', '2632-3019', 'ventas@mayrepc.gt',      '9a Av 12-50 Z1'),
+('Importadora Lindt',               '1234586-K', '2732-3020', 'contacto@lindt.gt',      'Av Reforma 15-45 Z9'),
+('Granos y Cereales GT',            '1234587-1', '2732-3021', 'info@granosgt.gt',       'Calle Mariscal 3-22 Z11'),
+('Decoraciones Comestibles',        '1234588-2', '2732-3022', 'ventas@decocom.gt',      '7a Av 20-15 Z14'),
+('Empaques Eco GT',                 '1234589-3', '2732-3023', 'pedidos@empecogt.gt',    'Calzada San Juan 35'),
+('Bebidas Embotelladas GT',         '1234590-4', '2732-3024', 'contacto@bebgt.gt',      '6a Av 8-50 Z1'),
+('Distribuidora Ferrero CA',        '1234591-5', '2732-3025', 'ventas@ferrero.gt',      'Diagonal 12 3-20 Z10');
 
 -- -----------------------------------------------------------------------------
 -- Cliente (25) — mezcla con y sin NIT (CF)
@@ -202,72 +202,71 @@ INSERT INTO Cliente (nombres, apellidos, nit, telefono, email, direccion) VALUES
 ('Alejandra',  'Monterroso Batres',     '987678-5', '5512-0025', 'alejandra.monter@mail.gt', '25a Av 10-19 Z13');
 
 -- -----------------------------------------------------------------------------
--- Producto (25) — id_categoria e id_marca rotan 1..25
--- Stock inicial alto (200) para soportar las ventas del seed.
+-- Producto (25) — 10 brownies estrella + 15 productos complementarios
+-- Precios en GTQ realistas. Stock alto (200) para soportar ventas del seed.
 -- -----------------------------------------------------------------------------
 INSERT INTO Producto (sku, nombre, descripcion, precio, stock, stock_minimo, id_categoria, id_marca) VALUES
-('SKU-0001', 'Smart TV 55 pulgadas 4K',        'Televisor LED 4K UHD',             4500.00, 200, 10,  1,  1),
-('SKU-0002', 'Refrigerador French Door',       'Refrigeradora de dos puertas',     8900.00, 200, 5,   2,  2),
-('SKU-0003', 'Silla ejecutiva ergonómica',     'Silla de oficina con soporte',     1200.00, 200, 10,  3,  3),
-('SKU-0004', 'Camisa polo manga corta',        'Polo algodón 100%',                 150.00, 200, 30,  4,  4),
-('SKU-0005', 'Tenis running profesional',      'Tenis deportivos',                  650.00, 200, 20,  5,  5),
-('SKU-0006', 'Set bloques constructivos',      'Set de 500 piezas',                 350.00, 200, 15,  6,  6),
-('SKU-0007', 'Novela de ficción bestseller',   'Libro edición de tapa dura',         90.00, 200, 50,  7,  7),
-('SKU-0008', 'Cuaderno universitario 200h',    'Cuaderno espiral',                   45.00, 200, 100, 8,  8),
-('SKU-0009', 'Balón de fútbol profesional',    'Balón tamaño 5',                    250.00, 200, 25,  9,  9),
-('SKU-0010', 'Set herramientas jardín',        'Pala, rastrillo y tijeras',         400.00, 200, 15, 10, 10),
-('SKU-0011', 'Taladro percutor inalámbrico',   'Taladro 20V con batería',           950.00, 200, 10, 11, 11),
-('SKU-0012', 'Sartén antiadherente 28cm',      'Sartén de aluminio recubierto',     300.00, 200, 20, 12, 12),
-('SKU-0013', 'Toallas de baño set 4pz',        'Toallas 100% algodón',              450.00, 200, 25, 13, 13),
-('SKU-0014', 'Detergente líquido 5L',          'Detergente multiuso',               180.00, 200, 30, 14, 14),
-('SKU-0015', 'Crema facial hidratante',        'Crema antiarrugas 50ml',            275.00, 200, 20, 15, 15),
-('SKU-0016', 'Multivitamínico 100 tabs',       'Suplemento diario',                 160.00, 200, 40, 16, 16),
-('SKU-0017', 'Audífonos bluetooth',            'Inalámbricos con cancelación',      800.00, 200, 15, 17, 17),
-('SKU-0018', 'Comida para perro 10kg',         'Alimento premium para adultos',     320.00, 200, 25, 18, 18),
-('SKU-0019', 'Caja de galletas surtidas',      'Galletas variadas 500g',             65.00, 200, 50, 19, 19),
-('SKU-0020', 'Refresco cola 2L',               'Bebida gaseosa',                     22.00, 200, 100, 20, 20),
-('SKU-0021', 'Set limpieza auto',              'Shampoo, cera y microfibra',        280.00, 200, 15, 21, 21),
-('SKU-0022', 'Guitarra acústica',              'Guitarra clásica de madera',       1800.00, 200, 8,  22, 22),
-('SKU-0023', 'Set lápices de colores 48',      'Lápices profesionales',             195.00, 200, 30, 23, 23),
-('SKU-0024', 'Pañales bebé talla M 80pz',      'Pañales desechables',               220.00, 200, 40, 24, 24),
-('SKU-0025', 'Mancuernas 10lb par',            'Mancuernas recubiertas',            320.00, 200, 20, 25, 25);
+('BRW-0001', 'Brownie Clásico',                'Brownie de chocolate tradicional, receta original',         30.00, 200, 50,  1,  1),
+('BRW-0002', 'Brownie Triple Chocolate',       'Brownie con chocolate negro, leche y blanco',               45.00, 200, 30,  2,  2),
+('BRW-0003', 'Brownie de Nuez',                'Brownie clásico con nuez de Castilla',                      35.00, 200, 40,  1,  1),
+('BRW-0004', 'Brownie Cheesecake',             'Brownie con corazón de queso crema',                        50.00, 200, 25,  5,  9),
+('BRW-0005', 'Brownie Vegano',                 'Brownie sin lácteos ni huevo, con cacao orgánico',          40.00, 200, 25,  3,  3),
+('BRW-0006', 'Brownie Sin Azúcar',             'Brownie endulzado con eritritol, apto diabéticos',          40.00, 200, 25,  4,  4),
+('BRW-0007', 'Brownie Oreo',                   'Brownie relleno y decorado con galletas Oreo',              45.00, 200, 30,  5, 21),
+('BRW-0008', 'Brownie Caramelo Salado',        'Brownie premium con caramelo salado y flor de sal',         45.00, 200, 25,  2,  9),
+('BRW-0009', 'Brownie Frambuesa',              'Brownie premium con coulis de frambuesa',                   45.00, 200, 25,  2,  2),
+('BRW-0010', 'Brownie Nutella',                'Brownie relleno de Nutella derretida',                      50.00, 200, 30,  5, 22),
+('CUP-0011', 'Cupcake Vainilla',               'Cupcake de vainilla con buttercream',                       18.00, 200, 60,  6,  1),
+('CUP-0012', 'Cupcake Red Velvet',             'Cupcake red velvet con cream cheese frosting',              25.00, 200, 50,  6,  2),
+('GAL-0013', 'Galleta Chispas Chocolate',      'Galleta artesanal con chispas de chocolate',                12.00, 200, 100, 8,  1),
+('COK-0014', 'Cookie Rellena Nutella',         'Cookie NY style rellena de Nutella',                        22.00, 200, 50,  9, 22),
+('CHK-0015', 'Cheesecake New York (porción)',  'Porción individual de cheesecake estilo NY',                75.00, 200, 30, 12,  9),
+('TAR-0016', 'Tarta de Manzana',               'Tarta entera 8 porciones, manzana caramelizada',           250.00, 200,  8, 11,  1),
+('MAC-0017', 'Macarrones Surtidos (caja 6)',   'Caja con 6 macarrones franceses surtidos',                 120.00, 200, 20, 13,  2),
+('DON-0018', 'Dona Glaseada',                  'Dona clásica glaseada azucarada',                           15.00, 200, 80, 14,  1),
+('CIN-0019', 'Cinnamon Roll',                  'Rollo de canela con glaseado de queso crema',               25.00, 200, 60, 15,  1),
+('TRU-0020', 'Trufa de Chocolate',             'Trufa artesanal hecha con chocolate Lindt',                  8.00, 200, 150,18, 14),
+('CAF-0021', 'Café Americano',                 'Café de altura, taza 12 oz',                                18.00, 200, 200,20, 25),
+('FRP-0022', 'Frappé de Brownie',              'Frappé con trozos de brownie y crema',                      35.00, 200, 80, 21,  1),
+('BSG-0023', 'Brownie Sin Gluten',             'Brownie sin gluten con harina de almendra',                 50.00, 200, 25, 23,  4),
+('CAJ-0024', 'Caja Regalo San Valentín',       'Caja con 6 brownies premium, edición limitada',            220.00, 200, 15, 25,  7),
+('CUP-0025', 'Cupcake Kids Arcoiris',          'Cupcake de vainilla con frosting multicolor',               25.00, 200, 50,  6,  5);
 
 -- -----------------------------------------------------------------------------
 -- Empleado (25) — password_hash es bcrypt de 'demo123' para todos los seeds.
--- id_rol e id_sucursal rotan 1..25.
+-- id_rol e id_sucursal rotan 1..25 (empleado i → rol i, sucursal i).
 -- -----------------------------------------------------------------------------
 INSERT INTO Empleado (nombres, apellidos, email, telefono, username, password_hash, fecha_ingreso, id_rol, id_sucursal) VALUES
-('Roberto',    'Alvarado Pineda',       'roberto.alvarado@tienda.gt',   '5511-0001', 'ralvarado',   '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-01-15',  1,  1),
-('Carmen',     'Barrios Escobar',       'carmen.barrios@tienda.gt',     '5511-0002', 'cbarrios',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-02-01',  2,  2),
-('Fernando',   'Coronado Solís',        'fernando.coronado@tienda.gt',  '5511-0003', 'fcoronado',   '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-02-15',  3,  3),
-('Silvia',     'Delgado Ramos',         'silvia.delgado@tienda.gt',     '5511-0004', 'sdelgado',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-03-01',  4,  4),
-('Marco',      'Estrada López',         'marco.estrada@tienda.gt',      '5511-0005', 'mestrada',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-03-15',  5,  5),
-('Patricia',   'Figueroa Cano',         'patricia.figueroa@tienda.gt',  '5511-0006', 'pfigueroa',   '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-04-01',  6,  6),
-('Ricardo',    'Guerrero Pinto',        'ricardo.guerrero@tienda.gt',   '5511-0007', 'rguerrero',   '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-04-15',  7,  7),
-('Lorena',     'Hurtado Méndez',        'lorena.hurtado@tienda.gt',     '5511-0008', 'lhurtado',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-05-01',  8,  8),
-('Andrés',     'Iglesias Soto',         'andres.iglesias@tienda.gt',    '5511-0009', 'aiglesias',   '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-05-15',  9,  9),
-('Beatriz',    'Juárez Cortez',         'beatriz.juarez@tienda.gt',     '5511-0010', 'bjuarez',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-06-01',  10, 10),
-('Óscar',      'Kuc Xol',               'oscar.kuc@tienda.gt',          '5511-0011', 'okuc',        '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-06-15',  11, 11),
-('Rosa',       'López Marroquín',       'rosa.lopez@tienda.gt',         '5511-0012', 'rlopez',      '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-07-01',  12, 12),
-('Jorge',      'Monzón Paniagua',       'jorge.monzon@tienda.gt',       '5511-0013', 'jmonzon',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-07-15',  13, 13),
-('Verónica',   'Núñez Aldana',          'veronica.nunez@tienda.gt',     '5511-0014', 'vnunez',      '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-08-01',  14, 14),
-('Edgar',      'Ochoa Valle',           'edgar.ochoa@tienda.gt',        '5511-0015', 'eochoa',      '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-08-15',  15, 15),
-('Mónica',     'Pacheco Lemus',         'monica.pacheco@tienda.gt',     '5511-0016', 'mpacheco',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-09-01',  16, 16),
-('Humberto',   'Quevedo Rayo',          'humberto.quevedo@tienda.gt',   '5511-0017', 'hquevedo',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-09-15',  17, 17),
-('Gloria',     'Rodríguez Tello',       'gloria.rodriguez@tienda.gt',   '5511-0018', 'grodriguez',  '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-10-01',  18, 18),
-('Alberto',    'Sandoval Urrutia',      'alberto.sandoval@tienda.gt',   '5511-0019', 'asandoval',   '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-10-15',  19, 19),
-('Claudia',    'Toledo Véliz',          'claudia.toledo@tienda.gt',     '5511-0020', 'ctoledo',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-11-01',  20, 20),
-('Mauricio',   'Urrea Zamora',          'mauricio.urrea@tienda.gt',     '5511-0021', 'murrea',      '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-11-15',  21, 21),
-('Nancy',      'Vivar Argueta',         'nancy.vivar@tienda.gt',        '5511-0022', 'nvivar',      '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-12-01',  22, 22),
-('Francisco',  'Wong Chang',            'francisco.wong@tienda.gt',     '5511-0023', 'fwong',       '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2024-12-15',  23, 23),
-('Alicia',     'Yax Coc',               'alicia.yax@tienda.gt',         '5511-0024', 'ayax',        '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2025-01-01',  24, 24),
-('David',      'Zepeda Ramírez',        'david.zepeda@tienda.gt',       '5511-0025', 'dzepeda',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '2025-01-15',  25, 25);
+('Ericka',     'Sandoval',              'ericka@bubus.gt',              '5511-0001', 'ericka',      '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-01-15',  1,  1),
+('Carmen',     'Barrios Escobar',       'carmen.barrios@bubus.gt',      '5511-0002', 'cbarrios',    '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-02-01',  2,  2),
+('Fernando',   'Coronado Solís',        'fernando.coronado@bubus.gt',   '5511-0003', 'fcoronado',   '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-02-15',  3,  3),
+('Silvia',     'Delgado Ramos',         'silvia.delgado@bubus.gt',      '5511-0004', 'sdelgado',    '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-03-01',  4,  4),
+('Marco',      'Estrada López',         'marco.estrada@bubus.gt',       '5511-0005', 'mestrada',    '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-03-15',  5,  5),
+('Patricia',   'Figueroa Cano',         'patricia.figueroa@bubus.gt',   '5511-0006', 'pfigueroa',   '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-04-01',  6,  6),
+('Ricardo',    'Guerrero Pinto',        'ricardo.guerrero@bubus.gt',    '5511-0007', 'rguerrero',   '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-04-15',  7,  7),
+('Lorena',     'Hurtado Méndez',        'lorena.hurtado@bubus.gt',      '5511-0008', 'lhurtado',    '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-05-01',  8,  8),
+('Andrés',     'Iglesias Soto',         'andres.iglesias@bubus.gt',     '5511-0009', 'aiglesias',   '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-05-15',  9,  9),
+('Beatriz',    'Juárez Cortez',         'beatriz.juarez@bubus.gt',      '5511-0010', 'bjuarez',     '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-06-01',  10, 10),
+('Óscar',      'Kuc Xol',               'oscar.kuc@bubus.gt',           '5511-0011', 'okuc',        '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-06-15',  11, 11),
+('Rosa',       'López Marroquín',       'rosa.lopez@bubus.gt',          '5511-0012', 'rlopez',      '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-07-01',  12, 12),
+('Jorge',      'Monzón Paniagua',       'jorge.monzon@bubus.gt',        '5511-0013', 'jmonzon',     '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-07-15',  13, 13),
+('Verónica',   'Núñez Aldana',          'veronica.nunez@bubus.gt',      '5511-0014', 'vnunez',      '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-08-01',  14, 14),
+('Edgar',      'Ochoa Valle',           'edgar.ochoa@bubus.gt',         '5511-0015', 'eochoa',      '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-08-15',  15, 15),
+('Mónica',     'Pacheco Lemus',         'monica.pacheco@bubus.gt',      '5511-0016', 'mpacheco',    '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-09-01',  16, 16),
+('Humberto',   'Quevedo Rayo',          'humberto.quevedo@bubus.gt',    '5511-0017', 'hquevedo',    '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-09-15',  17, 17),
+('Gloria',     'Rodríguez Tello',       'gloria.rodriguez@bubus.gt',    '5511-0018', 'grodriguez',  '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-10-01',  18, 18),
+('Alberto',    'Sandoval Urrutia',      'alberto.sandoval@bubus.gt',    '5511-0019', 'asandoval',   '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-10-15',  19, 19),
+('Claudia',    'Toledo Véliz',          'claudia.toledo@bubus.gt',      '5511-0020', 'ctoledo',     '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-11-01',  20, 20),
+('Mauricio',   'Urrea Zamora',          'mauricio.urrea@bubus.gt',      '5511-0021', 'murrea',      '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-11-15',  21, 21),
+('Nancy',      'Vivar Argueta',         'nancy.vivar@bubus.gt',         '5511-0022', 'nvivar',      '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-12-01',  22, 22),
+('Francisco',  'Wong Chang',            'francisco.wong@bubus.gt',      '5511-0023', 'fwong',       '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2024-12-15',  23, 23),
+('Alicia',     'Yax Coc',               'alicia.yax@bubus.gt',          '5511-0024', 'ayax',        '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2025-01-01',  24, 24),
+('David',      'Zepeda Ramírez',        'david.zepeda@bubus.gt',        '5511-0025', 'dzepeda',     '$2b$10$ZoBfOfpBNnBLgYRUr4IBcOKV.eYP4MJdyItAeOukioSS3kiN4Yv6i', '2025-01-15',  25, 25);
 
 -- -----------------------------------------------------------------------------
--- CompraProveedor (25)
--- Patrón: compras 1..5 tienen 2 detalles (subtotal 2000, impuesto 240, total 2240)
---         compras 6..25 tienen 1 detalle (subtotal 1000, impuesto 120, total 1120)
--- FKs rotan 1..25 para proveedor, empleado, sucursal.
+-- CompraProveedor (25) — pedidos de insumos a proveedores
+-- Patrón seed: compras 1..5 con 2 detalles (subtotal 2000, IVA 240, total 2240)
+--              compras 6..25 con 1 detalle (subtotal 1000, IVA 120, total 1120)
 -- -----------------------------------------------------------------------------
 INSERT INTO CompraProveedor (fecha, numero_factura, subtotal, impuesto, total, id_proveedor, id_empleado, id_sucursal) VALUES
 ('2025-01-05 09:00:00', 'FC-0001', 2000.00, 240.00, 2240.00,  1,  1,  1),
@@ -297,11 +296,10 @@ INSERT INTO CompraProveedor (fecha, numero_factura, subtotal, impuesto, total, i
 ('2025-01-29 09:00:00', 'FC-0025', 1000.00, 120.00, 1120.00, 25, 25, 25);
 
 -- -----------------------------------------------------------------------------
--- DetalleCompra (30) — 25 detalles principales (1 por compra) + 5 extras
--- en compras 1-5. Cada detalle: cantidad 10 * costo 100 = subtotal 1000.
+-- DetalleCompra (30) — 25 principales (1 por compra) + 5 extras en compras 1..5.
+-- Costo unitario uniforme 100 para mantener la aritmética del seed limpia.
 -- -----------------------------------------------------------------------------
 INSERT INTO DetalleCompra (id_compra, id_producto, cantidad, costo_unitario, subtotal) VALUES
--- Principal: un detalle por cada compra 1..25
 ( 1,  1, 10, 100.00, 1000.00),
 ( 2,  2, 10, 100.00, 1000.00),
 ( 3,  3, 10, 100.00, 1000.00),
@@ -327,7 +325,7 @@ INSERT INTO DetalleCompra (id_compra, id_producto, cantidad, costo_unitario, sub
 (23, 23, 10, 100.00, 1000.00),
 (24, 24, 10, 100.00, 1000.00),
 (25, 25, 10, 100.00, 1000.00),
--- Extras: segundo detalle en compras 1..5 con producto "espejo" para no romper UNIQUE
+-- Extras: segundo detalle en compras 1..5 con producto "espejo" (UNIQUE compra+producto).
 ( 1, 25, 10, 100.00, 1000.00),
 ( 2, 24, 10, 100.00, 1000.00),
 ( 3, 23, 10, 100.00, 1000.00),
@@ -335,11 +333,7 @@ INSERT INTO DetalleCompra (id_compra, id_producto, cantidad, costo_unitario, sub
 ( 5, 21, 10, 100.00, 1000.00);
 
 -- -----------------------------------------------------------------------------
--- Venta (25)
--- Ventas 1..15: con cliente registrado (id_cliente 1..15)
--- Ventas 16..25: mostrador (id_cliente NULL)
--- Ventas 1..5: 2 detalles (subtotal 2000, impuesto 240, total 2240)
--- Ventas 6..25: 1 detalle (subtotal 1000, impuesto 120, total 1120)
+-- Venta (25) — ventas 1..15 con cliente registrado, 16..25 mostrador (CF)
 -- -----------------------------------------------------------------------------
 INSERT INTO Venta (fecha, numero_factura, subtotal, impuesto, total, id_cliente, id_empleado, id_sucursal, id_metodo_pago) VALUES
 ('2025-02-05 10:00:00', 'FV-0001', 2000.00, 240.00, 2240.00,  1,  1,  1,  1),
@@ -357,7 +351,7 @@ INSERT INTO Venta (fecha, numero_factura, subtotal, impuesto, total, id_cliente,
 ('2025-02-17 10:00:00', 'FV-0013', 1000.00, 120.00, 1120.00, 13, 13, 13, 13),
 ('2025-02-18 10:00:00', 'FV-0014', 1000.00, 120.00, 1120.00, 14, 14, 14, 14),
 ('2025-02-19 10:00:00', 'FV-0015', 1000.00, 120.00, 1120.00, 15, 15, 15, 15),
--- Ventas de mostrador (sin cliente):
+-- Mostrador (sin cliente):
 ('2025-02-20 10:00:00', 'FV-0016', 1000.00, 120.00, 1120.00, NULL, 16, 16, 16),
 ('2025-02-21 10:00:00', 'FV-0017', 1000.00, 120.00, 1120.00, NULL, 17, 17, 17),
 ('2025-02-22 10:00:00', 'FV-0018', 1000.00, 120.00, 1120.00, NULL, 18, 18, 18),
@@ -370,11 +364,10 @@ INSERT INTO Venta (fecha, numero_factura, subtotal, impuesto, total, id_cliente,
 ('2025-03-01 10:00:00', 'FV-0025', 1000.00, 120.00, 1120.00, NULL, 25, 25, 25);
 
 -- -----------------------------------------------------------------------------
--- DetalleVenta (30) — 25 principales + 5 extras (en ventas 1-5).
--- precio_unitario es snapshot: coincide con Producto.precio al momento.
+-- DetalleVenta (30) — 25 principales + 5 extras (en ventas 1..5).
+-- precio_unitario es snapshot al momento de la venta.
 -- -----------------------------------------------------------------------------
 INSERT INTO DetalleVenta (id_venta, id_producto, cantidad, precio_unitario, subtotal) VALUES
--- Principal: un detalle por cada venta 1..25
 ( 1,  1, 10, 100.00, 1000.00),
 ( 2,  2, 10, 100.00, 1000.00),
 ( 3,  3, 10, 100.00, 1000.00),
@@ -400,7 +393,6 @@ INSERT INTO DetalleVenta (id_venta, id_producto, cantidad, precio_unitario, subt
 (23, 23, 10, 100.00, 1000.00),
 (24, 24, 10, 100.00, 1000.00),
 (25, 25, 10, 100.00, 1000.00),
--- Extras: segundo detalle en ventas 1..5
 ( 1, 25, 10, 100.00, 1000.00),
 ( 2, 24, 10, 100.00, 1000.00),
 ( 3, 23, 10, 100.00, 1000.00),
@@ -414,7 +406,6 @@ INSERT INTO DetalleVenta (id_venta, id_producto, cantidad, precio_unitario, subt
 --   AJUSTE:  ambos NULL, cantidad <> 0 (puede ser negativo)
 -- -----------------------------------------------------------------------------
 INSERT INTO MovimientoStock (fecha, tipo, cantidad, stock_resultante, motivo, id_producto, id_empleado, id_sucursal, id_compra, id_venta) VALUES
--- ENTRADAS: 15, vinculadas a compras 1..15
 ('2025-01-05 09:30:00', 'ENTRADA', 10, 210, 'Ingreso por compra FC-0001',  1,  1,  1,  1, NULL),
 ('2025-01-06 09:30:00', 'ENTRADA', 10, 210, 'Ingreso por compra FC-0002',  2,  2,  2,  2, NULL),
 ('2025-01-07 09:30:00', 'ENTRADA', 10, 210, 'Ingreso por compra FC-0003',  3,  3,  3,  3, NULL),
@@ -430,7 +421,6 @@ INSERT INTO MovimientoStock (fecha, tipo, cantidad, stock_resultante, motivo, id
 ('2025-01-17 09:30:00', 'ENTRADA', 10, 210, 'Ingreso por compra FC-0013', 13, 13, 13, 13, NULL),
 ('2025-01-18 09:30:00', 'ENTRADA', 10, 210, 'Ingreso por compra FC-0014', 14, 14, 14, 14, NULL),
 ('2025-01-19 09:30:00', 'ENTRADA', 10, 210, 'Ingreso por compra FC-0015', 15, 15, 15, 15, NULL),
--- SALIDAS: 10, vinculadas a ventas 1..10
 ('2025-02-05 10:30:00', 'SALIDA',  10, 200, 'Salida por venta FV-0001',    1,  1,  1, NULL,  1),
 ('2025-02-06 10:30:00', 'SALIDA',  10, 200, 'Salida por venta FV-0002',    2,  2,  2, NULL,  2),
 ('2025-02-07 10:30:00', 'SALIDA',  10, 200, 'Salida por venta FV-0003',    3,  3,  3, NULL,  3),
@@ -441,7 +431,6 @@ INSERT INTO MovimientoStock (fecha, tipo, cantidad, stock_resultante, motivo, id
 ('2025-02-12 10:30:00', 'SALIDA',  10, 200, 'Salida por venta FV-0008',    8,  8,  8, NULL,  8),
 ('2025-02-13 10:30:00', 'SALIDA',  10, 200, 'Salida por venta FV-0009',    9,  9,  9, NULL,  9),
 ('2025-02-14 10:30:00', 'SALIDA',  10, 200, 'Salida por venta FV-0010',   10, 10, 10, NULL, 10),
--- AJUSTES: 5, ambos FKs NULL (cantidad puede ser +/-)
 ('2025-03-02 11:00:00', 'AJUSTE',  -3, 197, 'Ajuste por conteo físico: faltante',  1,  1,  1, NULL, NULL),
 ('2025-03-03 11:00:00', 'AJUSTE',   5, 205, 'Ajuste por devolución interna',       2,  2,  2, NULL, NULL),
 ('2025-03-04 11:00:00', 'AJUSTE',  -2, 198, 'Ajuste por merma (producto dañado)',  3,  3,  3, NULL, NULL),

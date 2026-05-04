@@ -7,6 +7,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 13000
+EXPOSE 58080
 
 CMD ["node", "--watch", "src/index.js"]

@@ -1,27 +1,29 @@
 import express from 'express';
-import pg from 'pg';
+import session from 'express-session';
+import { pool } from './db.js';
+import { cors } from './middleware.js';
+import { authRouter } from './routes/auth.js';
+import { productosRouter } from './routes/productos.js';
 
-const { Pool } = pg;
 const app = express();
-const port = Number(process.env.PORT) || 13000;
+const port = Number(process.env.PORT) || 58080;
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.sendStatus(204);
-  next();
-});
-
+app.use(cors);
 app.use(express.json());
-
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+app.use(
+  session({
+    name: 'bubus.sid',
+    secret: process.env.SESSION_SECRET || 'cambiame',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 8,
+    },
+  })
+);
 
 app.get('/health', async (_req, res) => {
   try {
@@ -31,6 +33,9 @@ app.get('/health', async (_req, res) => {
     res.status(500).json({ status: 'error', error: err.message });
   }
 });
+
+app.use('/auth', authRouter);
+app.use('/productos', productosRouter);
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`backend listening on :${port}`);
